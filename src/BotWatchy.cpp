@@ -1,14 +1,22 @@
 #include "BotWatchy.h"
 
-BotWatchy::BotWatchy() {}
+const float VOLTAGE_MIN = 3.2;
+const float VOLTAGE_MAX = 4.1;
+const float VOLTAGE_RANGE = 0.9;
+
+BotWatchy::BotWatchy() {
+    Serial.begin(115200);
+    Serial.println("constructor");
+}
 
 void BotWatchy::drawWatchFace()
 {
   display.fillScreen(GxEPD_WHITE);
-  drawBattery();
-  // display.drawBitmap(50, 50, epd_bitmap_heart_empty, 27, 22, GxEPD_BLACK);
+  display.setTextColor(GxEPD_BLACK);
 
-  // display.setTextColor(GxEPD_BLACK);
+  drawBattery();
+  
+  // display.drawBitmap(50, 50, epd_bitmap_heart_empty, 27, 22, GxEPD_BLACK);
   // drawTime();
   // drawDate();
   // drawWeather();
@@ -63,7 +71,11 @@ void BotWatchy::drawDate()
 void BotWatchy::drawBattery()
 {
   float VBAT = getBatteryVoltage();
-  // battery states: 12
+  // 12 battery states
+  int batState = int(((VBAT - VOLTAGE_MIN) / VOLTAGE_RANGE) * 12);
+  Serial.println(batState);
+  display.setCursor(50, 50);
+  display.print(batState);
 
   // display.drawBitmap(154, 73, battery, 37, 21, DARKMODE ? GxEPD_WHITE : GxEPD_BLACK);
   // display.fillRect(159, 78, 27, BATTERY_SEGMENT_HEIGHT, DARKMODE ? GxEPD_BLACK : GxEPD_WHITE);//clear battery segments
