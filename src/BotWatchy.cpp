@@ -1,5 +1,26 @@
 #include "BotWatchy.h"
 
+const int posHeart0X       = 10;
+const int posHeart0Y       = 10;
+const int posHeart1X       = 40;
+const int posHeart1Y       = 10;
+const int posHeart2X       = 70;
+const int posHeart2Y       = 10;
+const int posTemperatureX  = 144;
+const int posTemperatureY  = 93;
+const int posTriforceX     = 9;
+const int posTriforceY     = 162;
+const int posWeatherBaseX  = 44;
+const int posWeatherBaseY  = 190;
+const int posWeather0X     = 59;
+const int posWeather0Y     = 157;
+const int posWeather1X     = 101;
+const int posWeather1Y     = 157;
+const int posWeather2X     = 144;
+const int posWeather2Y     = 157;
+const int posWifiX         = 144;
+const int posWifiY         = 37;
+
 const float VOLTAGE_MIN = 3.2;
 const float VOLTAGE_MAX = 4.1;
 const float VOLTAGE_RANGE = 0.9;
