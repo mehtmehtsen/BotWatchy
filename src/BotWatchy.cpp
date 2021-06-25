@@ -64,6 +64,23 @@ void BotWatchy::drawTime()
 
 void BotWatchy::drawDate()
 {
+  display.setFont(&Calamity_Bold8pt7b);
+
+  String dayOfWeek = dayStr(currentTime.Wday);
+  String month = monthStr(currentTime.Month);
+  
+  display.setCursor(12, 68);
+  display.println(dayOfWeek);
+
+  display.setCursor(12, 87);
+  display.print(month);
+  display.print(" ");
+  
+  display.print(currentTime.Day);
+  if (currentTime.Day == 1) display.print("st");
+  else if (currentTime.Day == 2) display.print("nd");
+  else if (currentTime.Day == 3) display.print("rd");
+  else display.print("th");
 }
 
 void BotWatchy::drawBattery()
