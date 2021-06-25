@@ -214,19 +214,19 @@ const unsigned char epd_bitmap_wifi_on [] PROGMEM = {
 };
 
 // Array of all bitmaps for convenience. (Total bytes used to store images in PROGMEM = 3008)
-const int epd_bitmap_allArray_LEN = 13;
-const unsigned char* epd_bitmap_allArray[13] = {
-	epd_bitmap_heart_full,
-	epd_bitmap_heart_half,
-	epd_bitmap_heart_quarter,
-	epd_bitmap_heart_threequarters,
-	epd_bitmap_temperature_base,
-	epd_bitmap_triforce,
-	epd_bitmap_weather_base,
-	epd_bitmap_weather_clouds,
-	epd_bitmap_weather_flash,
-	epd_bitmap_weather_rain,
-	epd_bitmap_weather_sun,
-	epd_bitmap_wifi_off,
-	epd_bitmap_wifi_on
-};
+// const int epd_bitmap_allArray_LEN = 13;
+// const unsigned char* epd_bitmap_allArray[13] = {
+// 	epd_bitmap_heart_full,
+// 	epd_bitmap_heart_half,
+// 	epd_bitmap_heart_quarter,
+// 	epd_bitmap_heart_threequarters,
+// 	epd_bitmap_temperature_base,
+// 	epd_bitmap_triforce,
+// 	epd_bitmap_weather_base,
+// 	epd_bitmap_weather_clouds,
+// 	epd_bitmap_weather_flash,
+// 	epd_bitmap_weather_rain,
+// 	epd_bitmap_weather_sun,
+// 	epd_bitmap_wifi_off,
+// 	epd_bitmap_wifi_on
+// };

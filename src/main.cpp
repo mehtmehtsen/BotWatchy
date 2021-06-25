@@ -1,8 +1,10 @@
 #include <Arduino.h>
-#include <Watchy.h>
+#include <BotWatchy.h>
+
+BotWatchy watchy;
 
 void setup() {
-  // put your setup code here, to run once:
+  watchy.init();
 }
 
 void loop() {
