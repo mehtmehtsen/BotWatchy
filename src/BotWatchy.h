@@ -3,6 +3,8 @@
 
 #include <Watchy.h>
 #include "../include/images.h"
+#include "../include/Calamity_Bold16pt7b.h"
+#include "../include/Calamity_Bold36pt7b.h"
 
 class BotWatchy : public Watchy
 {
