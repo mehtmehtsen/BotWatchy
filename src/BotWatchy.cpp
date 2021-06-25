@@ -188,21 +188,21 @@ void BotWatchy::drawWeather()
 
   //https://openweathermap.org/weather-conditions
   if (weatherConditionCode > 801) //Cloudy
-    display.drawBitmap(posWeather0X, posWeather0Y, epd_bitmap_weather_clouds, 27, 27, GxEPD_BLACK);
+    display.drawBitmap(posWeather0X, posWeather0Y, epd_bitmap_weather_clouds, 27, 27, GxEPD_WHITE);
   else if (weatherConditionCode == 801) //Few Clouds
-    display.drawBitmap(posWeather0X, posWeather0Y, epd_bitmap_weather_clouds, 27, 27, GxEPD_BLACK);
+    display.drawBitmap(posWeather0X, posWeather0Y, epd_bitmap_weather_clouds, 27, 27, GxEPD_WHITE);
   else if (weatherConditionCode == 800) //Clear
-    display.drawBitmap(posWeather0X, posWeather0Y, epd_bitmap_weather_sun, 27, 27, GxEPD_BLACK);
+    display.drawBitmap(posWeather0X, posWeather0Y, epd_bitmap_weather_sun, 27, 27, GxEPD_WHITE);
   else if (weatherConditionCode >= 700) //Atmosphere
-    display.drawBitmap(posWeather0X, posWeather0Y, epd_bitmap_weather_clouds, 27, 27, GxEPD_BLACK);
+    display.drawBitmap(posWeather0X, posWeather0Y, epd_bitmap_weather_clouds, 27, 27, GxEPD_WHITE);
   else if (weatherConditionCode >= 600) //Snow
-    display.drawBitmap(posWeather0X, posWeather0Y, epd_bitmap_weather_snow, 27, 27, GxEPD_BLACK);
+    display.drawBitmap(posWeather0X, posWeather0Y, epd_bitmap_weather_snow, 27, 27, GxEPD_WHITE);
   else if (weatherConditionCode >= 500) //Rain
-    display.drawBitmap(posWeather0X, posWeather0Y, epd_bitmap_weather_rain, 27, 27, GxEPD_BLACK);
+    display.drawBitmap(posWeather0X, posWeather0Y, epd_bitmap_weather_rain, 27, 27, GxEPD_WHITE);
   else if (weatherConditionCode >= 300) //Drizzle
-    display.drawBitmap(posWeather0X, posWeather0Y, epd_bitmap_weather_rain, 27, 27, GxEPD_BLACK);
+    display.drawBitmap(posWeather0X, posWeather0Y, epd_bitmap_weather_rain, 27, 27, GxEPD_WHITE);
   else if (weatherConditionCode >= 200) //Thunderstorm
-    display.drawBitmap(posWeather0X, posWeather0Y, epd_bitmap_weather_flash, 27, 27, GxEPD_BLACK);
+    display.drawBitmap(posWeather0X, posWeather0Y, epd_bitmap_weather_flash, 27, 27, GxEPD_WHITE);
   else
     return;
   // display.drawBitmap(145, 158, weatherIcon, WEATHER_ICON_WIDTH, WEATHER_ICON_HEIGHT, DARKMODE ? GxEPD_WHITE : GxEPD_BLACK);
