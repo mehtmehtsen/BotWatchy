@@ -4,16 +4,17 @@ BotWatchy::BotWatchy(){}
 
 void BotWatchy::drawWatchFace(){
     display.fillScreen(GxEPD_WHITE);
+    drawBattery();
+    // display.drawBitmap(50, 50, epd_bitmap_heart_empty, 27, 22, GxEPD_BLACK);
+    
     // display.setTextColor(GxEPD_BLACK);
     // drawTime();
     // drawDate(); 
     // drawWeather();
-    // drawBattery();
     // display.drawBitmap(120, 77, WIFI_CONFIGURED ? wifi : wifioff, 26, 18, DARKMODE ? GxEPD_WHITE : GxEPD_BLACK);
     // if(BLE_CONFIGURED){
     //     display.drawBitmap(100, 75, bluetooth, 13, 21, DARKMODE ? GxEPD_WHITE : GxEPD_BLACK);
     // }
-    display.drawBitmap(50, 50, epd_bitmap_heart_full, 27, 22, GxEPD_BLACK);
 }
 
 void BotWatchy::drawTime(){
@@ -57,6 +58,9 @@ void BotWatchy::drawDate(){
 }
 
 void BotWatchy::drawBattery(){
+    float VBAT = getBatteryVoltage();
+    // battery states: 12
+
     // display.drawBitmap(154, 73, battery, 37, 21, DARKMODE ? GxEPD_WHITE : GxEPD_BLACK);
     // display.fillRect(159, 78, 27, BATTERY_SEGMENT_HEIGHT, DARKMODE ? GxEPD_BLACK : GxEPD_WHITE);//clear battery segments
     // int8_t batteryLevel = 0;
