@@ -47,6 +47,19 @@ void BotWatchy::drawWatchFace()
 
 void BotWatchy::drawTime()
 {
+  display.setFont(&Calamity_Bold18pt7b);
+  display.setCursor(12, 140);
+  if (currentTime.Hour < 10)
+  {
+    display.print("0");
+  }
+  display.print(currentTime.Hour);
+  display.print(":");
+  if (currentTime.Minute < 10)
+  {
+    display.print("0");
+  }
+  display.println(currentTime.Minute);
 }
 
 void BotWatchy::drawDate()
