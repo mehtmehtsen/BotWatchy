@@ -11,7 +11,7 @@ const int posTemperatureY = 93;
 const int posTriforceX = 9;
 const int posTriforceY = 162;
 const int posWeatherBaseX = 44;
-const int posWeatherBaseY = 190;
+const int posWeatherBaseY = 150;
 const int posWeather0X = 59;
 const int posWeather0Y = 157;
 const int posWeather1X = 101;
@@ -36,7 +36,13 @@ void BotWatchy::drawWatchFace()
   display.fillScreen(GxEPD_WHITE);
   display.setTextColor(GxEPD_BLACK);
 
+  display.drawBitmap(posTriforceX, posTriforceY, epd_bitmap_triforce, 33, 28, GxEPD_BLACK);
+
+  drawTime();
+  drawDate();
+  drawWeather();
   drawBattery();
+  drawWifi();
 }
 
 void BotWatchy::drawTime()
@@ -50,6 +56,7 @@ void BotWatchy::drawDate()
 void BotWatchy::drawBattery()
 {
   float VBAT = getBatteryVoltage();
+
   // 12 battery states
   int batState = int(((VBAT - VOLTAGE_MIN) / VOLTAGE_RANGE) * 12);
   if (batState > 12)
@@ -142,4 +149,11 @@ void BotWatchy::drawBattery()
 
 void BotWatchy::drawWeather()
 {
+  display.drawBitmap(posWeatherBaseX, posWeatherBaseY, epd_bitmap_weather_base, 150, 40, GxEPD_BLACK);
+  display.drawBitmap(posTemperatureX, posTemperatureY, epd_bitmap_temperature_base, 50, 50, GxEPD_BLACK);
+}
+
+void BotWatchy::drawWifi()
+{
+  display.drawBitmap(posWifiX, posWifiY, epd_bitmap_wifi_off, 50, 50, GxEPD_BLACK);
 }

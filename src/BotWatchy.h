@@ -13,6 +13,7 @@ public:
   void drawDate();
   void drawWeather();
   void drawBattery();
+  void drawWifi();
 };
 
 #endif
