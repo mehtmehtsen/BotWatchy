@@ -27,7 +27,7 @@ const float VOLTAGE_RANGE = 0.9;
 
 BotWatchy::BotWatchy()
 {
-  Serial.begin(115200);
+  // Serial.begin(115200);
 }
 
 void BotWatchy::drawWatchFace()
