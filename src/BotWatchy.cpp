@@ -192,7 +192,7 @@ void BotWatchy::drawWeather()
 
   // temperature
   int temperature = currentWeatherOneCall.temperature;
-  
+
   int l = 16;
   int minTemp = -12;
   int maxTemp = 32;
@@ -203,10 +203,12 @@ void BotWatchy::drawWeather()
 
   int scaledAngle = map(temperature, minTemp, maxTemp, 0, scaledThreeQuarterPi);
   float angle = scaledAngle / float(scalingForMap);
-  if (angle > threeQuarterPi) angle = threeQuarterPi;
-  if (angle < 0) angle = 0;
+  if (angle > threeQuarterPi)
+    angle = threeQuarterPi;
+  if (angle < 0)
+    angle = 0;
   angle += 2.3561;
-  
+
   int startX = posTemperatureX + 25;
   int startY = posTemperatureY + 25;
   int endX = int(cos(angle) * l) + startX;
@@ -217,11 +219,15 @@ void BotWatchy::drawWeather()
   display.drawLine(startX, startY + 1, endX, endY + 1, GxEPD_WHITE);
 }
 
-void BotWatchy::drawWeatherIcon(int8_t iconPosX, int16_t iconWeatherConditionCode) {
+void BotWatchy::drawWeatherIcon(int8_t iconPosX, int16_t iconWeatherConditionCode)
+{
   int iconPosPxX = 0;
-  if (iconPosX == 0) iconPosPxX = posWeather0X;
-  if (iconPosX == 1) iconPosPxX = posWeather1X;
-  if (iconPosX == 2) iconPosPxX = posWeather2X;
+  if (iconPosX == 0)
+    iconPosPxX = posWeather0X;
+  if (iconPosX == 1)
+    iconPosPxX = posWeather1X;
+  if (iconPosX == 2)
+    iconPosPxX = posWeather2X;
 
   //https://openweathermap.org/weather-conditions
   if (iconWeatherConditionCode > 801) //Cloudy
@@ -249,35 +255,45 @@ void BotWatchy::drawWifi()
   display.drawBitmap(posWifiX, posWifiY, WIFI_CONFIGURED ? epd_bitmap_wifi_on : epd_bitmap_wifi_off, 50, 50, GxEPD_BLACK);
 }
 
-weatherDataOneCall BotWatchy::getWeatherData(){
-    if(weatherIntervalCounterOneCall >= WEATHER_UPDATE_INTERVAL){ //only update if WEATHER_UPDATE_INTERVAL has elapsed i.e. 30 minutes
-        if(connectWiFi()){//Use Weather API for live data if WiFi is connected
-            HTTPClient http;
-            http.setConnectTimeout(3000);//3 second max timeout
-            String weatherQueryURL = String("https://api.openweathermap.org/data/2.5/onecall?lat=") + String(LAT) + String("&lon=") + String(LON) + String("&exclude=minutely,hourly,alerts&appid=") + String(OWN_API_KEY);
-            http.begin(weatherQueryURL.c_str());
-            int httpResponseCode = http.GET();
-            if(httpResponseCode == 200) {
-                String payload = http.getString();
-                JSONVar responseObject = JSON.parse(payload);
-                currentWeatherOneCall.invalid = false;
-                currentWeatherOneCall.temperature = int(responseObject["current"]["temp"]);
-                currentWeatherOneCall.weatherConditionCode0 = int(responseObject["current"]["weather"][0]["id"]);
-                currentWeatherOneCall.weatherConditionCode1 = int(responseObject["daily"][1]["weather"][0]["id"]);
-                currentWeatherOneCall.weatherConditionCode2 = int(responseObject["daily"][2]["weather"][0]["id"]);
-            }else{
-                currentWeatherOneCall.invalid = true;
-            }
-            http.end();
-            //turn off radios
-            WiFi.mode(WIFI_OFF);
-            btStop();
-        }else{//No WiFi, use RTC Temperature
-            currentWeatherOneCall.invalid = true;
-        }
-        weatherIntervalCounterOneCall = 0;
-    }else{
-        weatherIntervalCounterOneCall++;
+weatherDataOneCall BotWatchy::getWeatherData()
+{
+  if (weatherIntervalCounterOneCall >= WEATHER_UPDATE_INTERVAL)
+  { //only update if WEATHER_UPDATE_INTERVAL has elapsed i.e. 30 minutes
+    if (connectWiFi())
+    { //Use Weather API for live data if WiFi is connected
+      HTTPClient http;
+      http.setConnectTimeout(3000); //3 second max timeout
+      String weatherQueryURL = String("https://api.openweathermap.org/data/2.5/onecall?lat=") + String(LAT) + String("&lon=") + String(LON) + String("&exclude=minutely,hourly,alerts&appid=") + String(OWN_API_KEY);
+      http.begin(weatherQueryURL.c_str());
+      int httpResponseCode = http.GET();
+      if (httpResponseCode == 200)
+      {
+        String payload = http.getString();
+        JSONVar responseObject = JSON.parse(payload);
+        currentWeatherOneCall.invalid = false;
+        currentWeatherOneCall.temperature = int(responseObject["current"]["temp"]);
+        currentWeatherOneCall.weatherConditionCode0 = int(responseObject["current"]["weather"][0]["id"]);
+        currentWeatherOneCall.weatherConditionCode1 = int(responseObject["daily"][1]["weather"][0]["id"]);
+        currentWeatherOneCall.weatherConditionCode2 = int(responseObject["daily"][2]["weather"][0]["id"]);
+      }
+      else
+      {
+        currentWeatherOneCall.invalid = true;
+      }
+      http.end();
+      //turn off radios
+      WiFi.mode(WIFI_OFF);
+      btStop();
     }
-    return currentWeatherOneCall;
+    else
+    { //No WiFi, use RTC Temperature
+      currentWeatherOneCall.invalid = true;
+    }
+    weatherIntervalCounterOneCall = 0;
+  }
+  else
+  {
+    weatherIntervalCounterOneCall++;
+  }
+  return currentWeatherOneCall;
 }
