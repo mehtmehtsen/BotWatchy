@@ -182,30 +182,13 @@ void BotWatchy::drawBattery()
 void BotWatchy::drawWeather()
 {
   weatherDataOneCall currentWeatherOneCall = getWeatherData();
-  int16_t weatherConditionCode = currentWeatherOneCall.weatherConditionCode0;
 
   display.drawBitmap(posWeatherBaseX, posWeatherBaseY, epd_bitmap_weather_base, 150, 40, GxEPD_BLACK);
   display.drawBitmap(posTemperatureX, posTemperatureY, epd_bitmap_temperature_base, 50, 50, GxEPD_BLACK);
 
-  //https://openweathermap.org/weather-conditions
-  if (weatherConditionCode > 801) //Cloudy
-    display.drawBitmap(posWeather0X, posWeather0Y, epd_bitmap_weather_clouds, 27, 27, GxEPD_WHITE);
-  else if (weatherConditionCode == 801) //Few Clouds
-    display.drawBitmap(posWeather0X, posWeather0Y, epd_bitmap_weather_clouds, 27, 27, GxEPD_WHITE);
-  else if (weatherConditionCode == 800) //Clear
-    display.drawBitmap(posWeather0X, posWeather0Y, epd_bitmap_weather_sun, 27, 27, GxEPD_WHITE);
-  else if (weatherConditionCode >= 700) //Atmosphere
-    display.drawBitmap(posWeather0X, posWeather0Y, epd_bitmap_weather_clouds, 27, 27, GxEPD_WHITE);
-  else if (weatherConditionCode >= 600) //Snow
-    display.drawBitmap(posWeather0X, posWeather0Y, epd_bitmap_weather_snow, 27, 27, GxEPD_WHITE);
-  else if (weatherConditionCode >= 500) //Rain
-    display.drawBitmap(posWeather0X, posWeather0Y, epd_bitmap_weather_rain, 27, 27, GxEPD_WHITE);
-  else if (weatherConditionCode >= 300) //Drizzle
-    display.drawBitmap(posWeather0X, posWeather0Y, epd_bitmap_weather_rain, 27, 27, GxEPD_WHITE);
-  else if (weatherConditionCode >= 200) //Thunderstorm
-    display.drawBitmap(posWeather0X, posWeather0Y, epd_bitmap_weather_flash, 27, 27, GxEPD_WHITE);
-  else
-    return;
+  drawWeatherIcon(0, currentWeatherOneCall.weatherConditionCode0);
+  drawWeatherIcon(1, currentWeatherOneCall.weatherConditionCode1);
+  drawWeatherIcon(2, currentWeatherOneCall.weatherConditionCode2);
 
   // temperature
   int temperature = currentWeatherOneCall.temperature;
@@ -234,8 +217,31 @@ void BotWatchy::drawWeather()
   display.drawLine(startX, startY + 1, endX, endY + 1, GxEPD_WHITE);
 }
 
-void BotWatchy::drawWeatherIcon() {
+void BotWatchy::drawWeatherIcon(int8_t iconPosX, int16_t iconWeatherConditionCode) {
+  int iconPosPxX = 0;
+  if (iconPosX == 0) iconPosPxX = posWeather0X;
+  if (iconPosX == 1) iconPosPxX = posWeather1X;
+  if (iconPosX == 2) iconPosPxX = posWeather2X;
 
+  //https://openweathermap.org/weather-conditions
+  if (iconWeatherConditionCode > 801) //Cloudy
+    display.drawBitmap(iconPosPxX, posWeather0Y, epd_bitmap_weather_clouds, 27, 27, GxEPD_WHITE);
+  else if (iconWeatherConditionCode == 801) //Few Clouds
+    display.drawBitmap(iconPosPxX, posWeather0Y, epd_bitmap_weather_clouds, 27, 27, GxEPD_WHITE);
+  else if (iconWeatherConditionCode == 800) //Clear
+    display.drawBitmap(iconPosPxX, posWeather0Y, epd_bitmap_weather_sun, 27, 27, GxEPD_WHITE);
+  else if (iconWeatherConditionCode >= 700) //Atmosphere
+    display.drawBitmap(iconPosPxX, posWeather0Y, epd_bitmap_weather_clouds, 27, 27, GxEPD_WHITE);
+  else if (iconWeatherConditionCode >= 600) //Snow
+    display.drawBitmap(iconPosPxX, posWeather0Y, epd_bitmap_weather_snow, 27, 27, GxEPD_WHITE);
+  else if (iconWeatherConditionCode >= 500) //Rain
+    display.drawBitmap(iconPosPxX, posWeather0Y, epd_bitmap_weather_rain, 27, 27, GxEPD_WHITE);
+  else if (iconWeatherConditionCode >= 300) //Drizzle
+    display.drawBitmap(iconPosPxX, posWeather0Y, epd_bitmap_weather_rain, 27, 27, GxEPD_WHITE);
+  else if (iconWeatherConditionCode >= 200) //Thunderstorm
+    display.drawBitmap(iconPosPxX, posWeather0Y, epd_bitmap_weather_flash, 27, 27, GxEPD_WHITE);
+  else
+    return;
 }
 
 void BotWatchy::drawWifi()
