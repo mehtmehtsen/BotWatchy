@@ -5,6 +5,15 @@
 #include "../include/images.h"
 #include "../include/Calamity_Bold18pt7b.h"
 #include "../include/Calamity_Bold8pt7b.h"
+#include "../include/secrets.h"
+
+typedef struct weatherDataOneCall{
+  boolean invalid;
+  int8_t temperature;
+  int16_t weatherConditionCode0;
+  int16_t weatherConditionCode1;
+  int16_t weatherConditionCode2;
+}weatherDataOneCall;
 
 class BotWatchy : public Watchy
 {
@@ -16,6 +25,8 @@ public:
   void drawWeather();
   void drawBattery();
   void drawWifi();
+
+  weatherDataOneCall getWeatherData();
 };
 
 #endif
