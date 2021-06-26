@@ -263,7 +263,7 @@ weatherDataOneCall BotWatchy::getWeatherData()
     { //Use Weather API for live data if WiFi is connected
       HTTPClient http;
       http.setConnectTimeout(3000); //3 second max timeout
-      String weatherQueryURL = String("https://api.openweathermap.org/data/2.5/onecall?lat=") + String(LAT) + String("&lon=") + String(LON) + String("&exclude=minutely,hourly,alerts&appid=") + String(OWN_API_KEY);
+      String weatherQueryURL = String("https://api.openweathermap.org/data/2.5/onecall?lat=") + String(LAT) + String("&lon=") + String(LON) + String("&exclude=minutely,hourly,alerts&units=metric&appid=") + String(OWN_API_KEY);
       http.begin(weatherQueryURL.c_str());
       int httpResponseCode = http.GET();
       if (httpResponseCode == 200)
