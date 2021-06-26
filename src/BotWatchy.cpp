@@ -180,7 +180,6 @@ void BotWatchy::drawWeather()
 {
   weatherData currentWeather = getWeatherData();
 
-  int8_t temperature = currentWeather.temperature;
   int16_t weatherConditionCode = currentWeather.weatherConditionCode;
 
   display.drawBitmap(posWeatherBaseX, posWeatherBaseY, epd_bitmap_weather_base, 150, 40, GxEPD_BLACK);
@@ -205,7 +204,32 @@ void BotWatchy::drawWeather()
     display.drawBitmap(posWeather0X, posWeather0Y, epd_bitmap_weather_flash, 27, 27, GxEPD_WHITE);
   else
     return;
-  // display.drawBitmap(145, 158, weatherIcon, WEATHER_ICON_WIDTH, WEATHER_ICON_HEIGHT, DARKMODE ? GxEPD_WHITE : GxEPD_BLACK);
+
+  // temperature
+  int8_t temperature = currentWeather.temperature;
+
+  int8_t l = 16;
+  int8_t minTemp = -12;
+  int8_t maxTemp = 32;
+
+  int16_t scalingForMap = 10000;
+  float threeQuarterPi = 4.7123;
+  int16_t scaledThreeQuarterPi = threeQuarterPi * scalingForMap;
+
+  int scaledAngle = map(temperature, minTemp, maxTemp, 0, scaledThreeQuarterPi);
+  float angle = scaledAngle / float(scalingForMap);
+  if (angle > threeQuarterPi) angle = threeQuarterPi;
+  if (angle < 0) angle = 0;
+  angle += 2.3561;
+  
+  int startX = posTemperatureX + 25;
+  int startY = posTemperatureY + 25;
+  int endX = int(cos(angle) * l) + startX;
+  int endY = int(sin(angle) * l) + startY;
+
+  display.drawLine(startX, startY, endX, endY, GxEPD_WHITE);
+  display.drawLine(startX + 1, startY, endX + 1, endY, GxEPD_WHITE);
+  display.drawLine(startX, startY + 1, endX, endY + 1, GxEPD_WHITE);
 }
 
 void BotWatchy::drawWifi()
