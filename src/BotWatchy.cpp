@@ -206,15 +206,15 @@ void BotWatchy::drawWeather()
     return;
 
   // temperature
-  int8_t temperature = currentWeather.temperature;
+  int temperature = currentWeather.temperature;
+  
+  int l = 16;
+  int minTemp = -12;
+  int maxTemp = 32;
 
-  int8_t l = 16;
-  int8_t minTemp = -12;
-  int8_t maxTemp = 32;
-
-  int16_t scalingForMap = 10000;
+  int scalingForMap = 10000;
   float threeQuarterPi = 4.7123;
-  int16_t scaledThreeQuarterPi = threeQuarterPi * scalingForMap;
+  int scaledThreeQuarterPi = threeQuarterPi * scalingForMap;
 
   int scaledAngle = map(temperature, minTemp, maxTemp, 0, scaledThreeQuarterPi);
   float angle = scaledAngle / float(scalingForMap);
