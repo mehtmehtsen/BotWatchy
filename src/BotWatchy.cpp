@@ -214,6 +214,8 @@ void BotWatchy::drawWeather()
   int endX = int(cos(angle) * l) + startX;
   int endY = int(sin(angle) * l) + startY;
 
+  // draw line three times so no matter the pointer orientation,
+  // the pointer is about two pixels wide
   display.drawLine(startX, startY, endX, endY, GxEPD_WHITE);
   display.drawLine(startX + 1, startY, endX + 1, endY, GxEPD_WHITE);
   display.drawLine(startX, startY + 1, endX, endY + 1, GxEPD_WHITE);
