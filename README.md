@@ -35,6 +35,13 @@ What I want to say is: it's entirely possible platformIO will just compile and u
 The Watchy library's authors apparently are way nicer people than I am, so they left their openweathermap.org API key in the code. I'm not that nice, so you'll have to use your own. Additionally, I don't want everybody to know my location, so what I did was I put my API key and location data into a file called `include/secrets.h`, included it in `src/BotWatchy.h` aaand... also added it to the `.gitignore`.  
 I added a `include/secrets_template.h`, though, which you may copy as `include/secrets.h` and add your information to.
 
+### You want to change, modify or break the icons?
+
+All used image assets are provided in the `assets` folder. Modify them to your heart's content and then use [image2cpp tool](http://javl.github.io/image2cpp/) to convert them. Make sure you tick 'Invert image colors', as I made the colors the wrong way around.  
+I commented out the code related to the 'Array of all bitmaps for convenience' in the output code, as it was causing me inconvenience.
+
+The UI font's original files are not included. See [here](https://www.reddit.com/r/zelda/comments/5txuba/breath_of_the_wild_ui_font/) for source. I let some online tool convert it to .ttf and then used [truetype2gfx](https://rop.nl/truetype2gfx/) to convert to C code.
+
 ## Thanks and contributions
 
 ### Zelda BOTW UI Kit by Hunter Paramore
