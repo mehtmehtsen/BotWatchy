@@ -1,5 +1,7 @@
 # BotWatchy
 
+![alt text](watchface.gif "This is what you will get")
+
 This is a watch face for the open E-Ink display smartwatch [Watchy](https://watchy.sqfmi.com/).  
 It is inspired by the HUD of 'The Legend of Zelda - Breath of the Wild' (BotW). The name is derived from the game's title and has nothing to do with any kind of bot. Rather, it's short for 'Breath of the Watchy'.
 
