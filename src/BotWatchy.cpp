@@ -233,7 +233,7 @@ void BotWatchy::drawWeatherIcon(int8_t iconPosX, int16_t iconWeatherConditionCod
   if (iconWeatherConditionCode > 801) //Cloudy
     display.drawBitmap(iconPosPxX, posWeather0Y, epd_bitmap_weather_clouds, 27, 27, GxEPD_WHITE);
   else if (iconWeatherConditionCode == 801) //Few Clouds
-    display.drawBitmap(iconPosPxX, posWeather0Y, epd_bitmap_weather_clouds, 27, 27, GxEPD_WHITE);
+    display.drawBitmap(iconPosPxX, posWeather0Y, epd_bitmap_weather_partlycloudy, 27, 27, GxEPD_WHITE);
   else if (iconWeatherConditionCode == 800) //Clear
     display.drawBitmap(iconPosPxX, posWeather0Y, epd_bitmap_weather_sun, 27, 27, GxEPD_WHITE);
   else if (iconWeatherConditionCode >= 700) //Atmosphere
