@@ -1,3 +1,7 @@
+# Outdated
+
+It has come to my attention that this is outdated. Make sure to refer [https://github.com/mehtmehtsen/BotWatchy/issues/1](here) for more information and check the projects forked from this one.
+
 # BotWatchy
 
 ![alt text](watchface.gif "This is what you will get")
